@@ -8,14 +8,9 @@ import net.serenitybdd.screenplay.annotations.CastMember;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import page.AddRemoveListViewPage;
-import page.AddRemovePage;
-import page.HomePage;
-import page.PassDataPage;
-import task.Add;
-import task.Navigate;
-import task.PassData;
-import task.Remove;
+import page.*;
+import question.Location;
+import task.*;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.containsText;
@@ -98,4 +93,25 @@ public class DemoTests {
                 Ensure.that(AddRemoveListViewPage.LBL_TITLE("Quynh")).isNotDisplayed()
         );
     }
+    @Test
+    public void test6() {
+        givenThat(actor).attemptsTo(
+               Click.on(HomePage.ICON_MENU)
+        );
+        when(actor).attemptsTo(
+                Search.by("RatingBar"),
+                WaitABit.inSeconds(2)
+        );
+//        when(actor).attemptsTo(
+//                Enter.theValue("2.0").into(RatingBarPage.BTN_RATINGBAR)
+//        );
+        when(actor).attemptsTo(
+                Location.to(RatingBarPage.BTN_RATINGBAR,2)
+        );
+        System.out.println("size"+(RatingBarPage.BTN_RATINGBAR.resolveFor(actor).getSize()));
+
+//        then(actor).should(
+//                seeThat(the(RatingBarPage.LBL_TEXT), containsText("Need a little bit improvement")));
+    }
+
 }
